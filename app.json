@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "bluefinances",
+    "slug": "bluefinances",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
