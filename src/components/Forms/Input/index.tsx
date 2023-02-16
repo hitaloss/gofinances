@@ -1,12 +1,11 @@
-import { View, Text } from "react-native";
+import { TextInputProps } from "react-native";
 import React from "react";
+import { Container } from "./styles";
 
-function Input() {
-  return (
-    <View>
-      <Text>Input</Text>
-    </View>
-  );
+type Props = TextInputProps;
+
+function Input({ ...rest }: Props) {
+  return <Container {...rest} />;
 }
 
 export default Input;
