@@ -1,7 +1,7 @@
-import { View, Text } from "react-native";
 import React from "react";
-import { Container, Header, Title, Form } from "./styles";
+import { Container, Header, Title, Form, Fields } from "./styles";
 import Input from "../../components/Forms/Input";
+import Button from "../../components/Forms/Button";
 
 function Register() {
   return (
@@ -11,8 +11,12 @@ function Register() {
       </Header>
 
       <Form>
-        <Input placeholder="Nome" />
-        <Input placeholder="Preço" />
+        <Fields>
+          <Input placeholder="Nome" />
+          <Input placeholder="Preço" />
+        </Fields>
+
+        <Button text="Enviar" />
       </Form>
     </Container>
   );
