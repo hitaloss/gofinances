@@ -12,7 +12,7 @@ import * as Font from "expo-font";
 
 import Dashboard from "./src/screens/Dashboard";
 import theme from "./global/styles/theme";
-import HighlightCard from "./src/components/HighlightCard";
+import Register from "./src/screens/Register";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -52,7 +52,8 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Dashboard />
+      {/* <Dashboard /> */}
+      <Register />
     </ThemeProvider>
   );
 }
