@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Header, Title, Form, Fields } from "./styles";
 import Input from "../../components/Forms/Input";
 import Button from "../../components/Forms/Button";
+import TransactionTypeBtn from "../../components/Forms/TransactionTypeBtn";
 
 function Register() {
   return (
@@ -14,6 +15,8 @@ function Register() {
         <Fields>
           <Input placeholder="Nome" />
           <Input placeholder="Preço" />
+          <TransactionTypeBtn type="up" text="Income" />
+          <TransactionTypeBtn type="down" text="Outcome" />
         </Fields>
 
         <Button text="Enviar" />
