@@ -1,11 +1,13 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { Container } from "./styles";
+import { Container, Header, Title } from "./styles";
 
 function Register() {
   return (
     <Container>
-      <Text>Register page</Text>
+      <Header>
+        <Title>Cadastro</Title>
+      </Header>
     </Container>
   );
 }
