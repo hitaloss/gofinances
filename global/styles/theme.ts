@@ -16,6 +16,7 @@ export default {
         text: "#333333",
         text_darker: "#000000",
         captions: "#969CB2",
+        captions_light: "rgba(150, 156, 178, .3)",
         background: "#F0F2F5"
     },
     fonts: {

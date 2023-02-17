@@ -5,6 +5,7 @@ import { TouchableOpacityProps } from "react-native";
 interface Props extends TouchableOpacityProps {
   text: string;
   type: "up" | "down";
+  isActive: boolean;
 }
 
 const icons = {
@@ -12,10 +13,10 @@ const icons = {
   down: "arrow-down-circle",
 };
 
-function TransactionTypeBtn({ text, type, ...rest }: Props) {
+function TransactionTypeBtn({ text, type, isActive, ...rest }: Props) {
   return (
-    <Container {...rest}>
-      <Icon name={icons[type]} />
+    <Container {...rest} isActive={isActive} type={type}>
+      <Icon name={icons[type]} type={type} />
       <Title>{text}</Title>
     </Container>
   );
