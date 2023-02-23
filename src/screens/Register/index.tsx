@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Modal } from "react-native";
 import {
   Container,
   Header,
@@ -10,12 +11,23 @@ import {
 import Input from "../../components/Forms/Input";
 import Button from "../../components/Forms/Button";
 import TransactionTypeBtn from "../../components/Forms/TransactionTypeBtn";
+import SelectCategory from "../../components/Forms/SelectCategory";
+import CategoryModal, { Category } from "../CategoryModal";
 
 function Register() {
   const [typeSelected, setTypeSelected] = useState<string>("");
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [category, setCategory] = useState<Category>({
+    key: "category",
+    name: "Categoria",
+  });
 
   const handleTypeSelected = (type: "up" | "down") => {
     setTypeSelected(type);
+  };
+
+  const handleCloseCategory = () => {
+    setIsOpen(false);
   };
 
   return (
@@ -42,10 +54,19 @@ function Register() {
               text="Outcome"
             />
           </TransactionsTypes>
+          <SelectCategory title="Category" />
         </Fields>
 
         <Button text="Enviar" />
       </Form>
+
+      <Modal visible={isOpen}>
+        <CategoryModal
+          category={category}
+          setCategory={setCategory}
+          closeSelectCategory={handleCloseCategory}
+        />
+      </Modal>
     </Container>
   );
 }

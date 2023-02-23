@@ -8,7 +8,7 @@ interface Props extends TouchableOpacityProps {
 
 function Button({ text, ...rest }: Props) {
   return (
-    <Container {...rest}>
+    <Container activeOpacity={0.7} {...rest}>
       <Title>{text}</Title>
     </Container>
   );

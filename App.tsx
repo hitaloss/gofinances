@@ -13,6 +13,7 @@ import * as Font from "expo-font";
 import Dashboard from "./src/screens/Dashboard";
 import theme from "./global/styles/theme";
 import Register from "./src/screens/Register";
+import CategoryModal from "./src/screens/CategoryModal";
 
 SplashScreen.preventAutoHideAsync();
 
