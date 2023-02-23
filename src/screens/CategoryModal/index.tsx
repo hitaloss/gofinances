@@ -25,6 +25,10 @@ interface Props {
 }
 
 function CategoryModal({ category, setCategory, closeSelectCategory }: Props) {
+  const handleCurrentCategory = (item: Category) => {
+    setCategory(item);
+  };
+
   return (
     <Container>
       <Header>
@@ -35,7 +39,10 @@ function CategoryModal({ category, setCategory, closeSelectCategory }: Props) {
         style={{ flex: 1, width: "100%" }}
         keyExtractor={(item) => item.key}
         renderItem={({ item }) => (
-          <Category>
+          <Category
+            onPress={() => handleCurrentCategory(item)}
+            isActive={category.key === item.key}
+          >
             <Icon name={item.icon} />
             <Name>{item.name}</Name>
           </Category>
@@ -43,7 +50,7 @@ function CategoryModal({ category, setCategory, closeSelectCategory }: Props) {
         ItemSeparatorComponent={() => <Separator />}
       />
       <Footer>
-        <Button text="Selecionar" />
+        <Button text="Selecionar" onPress={closeSelectCategory} />
       </Footer>
     </Container>
   );

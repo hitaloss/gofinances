@@ -29,6 +29,9 @@ function Register() {
   const handleCloseCategory = () => {
     setIsOpen(false);
   };
+  const handleOpenCategory = () => {
+    setIsOpen(true);
+  };
 
   return (
     <Container>
@@ -54,7 +57,7 @@ function Register() {
               text="Outcome"
             />
           </TransactionsTypes>
-          <SelectCategory title="Category" />
+          <SelectCategory title={category.name} onPress={handleOpenCategory} />
         </Fields>
 
         <Button text="Enviar" />
