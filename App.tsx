@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import AppRoutes from "./src/routes/app.routes";
+
 import { ThemeProvider } from "styled-components";
 import {
   useFonts,
@@ -10,10 +13,7 @@ import Entypo from "@expo/vector-icons/Entypo";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 
-import Dashboard from "./src/screens/Dashboard";
 import theme from "./global/styles/theme";
-import Register from "./src/screens/Register";
-import CategoryModal from "./src/screens/CategoryModal";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -53,8 +53,9 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Dashboard />
-      {/* <Register /> */}
+      <NavigationContainer>
+        <AppRoutes />
+      </NavigationContainer>
     </ThemeProvider>
   );
 }
