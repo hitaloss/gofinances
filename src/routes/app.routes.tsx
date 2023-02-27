@@ -1,7 +1,9 @@
 import React from "react";
+import { Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { useTheme } from "styled-components";
+import { MaterialIcons } from "@expo/vector-icons";
 
 import Dashboard from "../screens/Dashboard";
 import Register from "../screens/Register";
@@ -17,11 +19,44 @@ function AppRoutes() {
         headerShown: false,
         tabBarActiveTintColor: theme.colors.secondary,
         tabBarInactiveTintColor: theme.colors.captions,
+        tabBarLabelPosition: "beside-icon",
+        tabBarStyle: {
+          paddingVertical: Platform.OS === "ios" ? 20 : 0,
+          height: 70,
+        },
       }}
     >
-      <Screen name="Listagem" component={Dashboard} />
-      <Screen name="Cadastrar" component={Register} />
-      <Screen name="Resumo" component={Register} />
+      <Screen
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <MaterialIcons
+              size={size}
+              color={color}
+              name="format-list-bulleted"
+            />
+          ),
+        }}
+        name="Listagem"
+        component={Dashboard}
+      />
+      <Screen
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <MaterialIcons size={size} color={color} name="attach-money" />
+          ),
+        }}
+        name="Cadastrar"
+        component={Register}
+      />
+      <Screen
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <MaterialIcons size={size} color={color} name="pie-chart" />
+          ),
+        }}
+        name="Resumo"
+        component={Register}
+      />
     </Navigator>
   );
 }

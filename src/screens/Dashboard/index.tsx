@@ -75,9 +75,11 @@ function Dashboard() {
               <UserName>Hítalo</UserName>
             </GreetingsText>
           </GreetingsCard>
+
           <PowerBtn name="power" />
         </UserWraper>
       </Header>
+
       <HighlightCards>
         <HighlightCard
           type="up"
@@ -98,6 +100,7 @@ function Dashboard() {
           lastTransaction={"1 à 16 de abril"}
         />
       </HighlightCards>
+
       <Transactions>
         <Title>Listagem</Title>
         <TransactionList
