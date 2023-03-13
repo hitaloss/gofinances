@@ -57,6 +57,7 @@ export const UserName = styled.Text`
     font-size: ${RFValue(18)}px;
 `
 
+
 export const PowerBtn = styled(Feather)`
     color: ${({theme}) => theme.colors.secondary};
     font-size: ${RFValue(24)}px;

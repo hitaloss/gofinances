@@ -14,6 +14,7 @@ import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 
 import theme from "./global/styles/theme";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -60,4 +61,12 @@ function App() {
   );
 }
 
-export default App;
+export default function WrappedApp() {
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <App />
+    </GestureHandlerRootView>
+  );
+}
+
+// export default App;
