@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import uuid from "react-native-uuid";
+
 import { Modal, TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 import {
   Container,
@@ -18,6 +20,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { categorySchema } from "../../schemas/schema";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 function Register() {
   const [typeSelected, setTypeSelected] = useState<string>("");
 
@@ -28,6 +32,8 @@ function Register() {
     name: "Categoria",
   });
 
+  const dataKey = "@blufinances:transactions";
+
   const {
     handleSubmit,
     control,
@@ -36,18 +42,34 @@ function Register() {
     resolver: yupResolver(categorySchema),
   });
 
-  const handleRegisterForm = (form: Record<string, string>) => {
+  const handleRegisterForm = async (form: Record<string, string>) => {
     if (!typeSelected) return Alert.alert("Selecione o tipo de transação");
     if (category.key === "category")
       return Alert.alert("Selecione a categoria");
 
-    const data = {
+    const newTransaction = {
+      id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
       typeSelected,
       category: category.key,
+      date: new Date(),
     };
-    console.log(data);
+
+    try {
+      const transactionStorage = await AsyncStorage.getItem(dataKey);
+
+      const transactionHistory = transactionStorage
+        ? JSON.parse(transactionStorage)
+        : [];
+
+      const currentStorage = [...transactionHistory, newTransaction];
+
+      await AsyncStorage.setItem(dataKey, JSON.stringify(currentStorage));
+    } catch (error) {
+      console.log(error);
+      Alert.alert("Não foi possível salvar");
+    }
   };
 
   const handleTypeSelected = (type: "up" | "down") => {
