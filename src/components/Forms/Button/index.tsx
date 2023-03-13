@@ -9,12 +9,12 @@ import { RectButtonProps } from "react-native-gesture-handler";
 
 interface Props extends RectButtonProps {
   text: string;
+  onPress: () => void;
 }
 
 function Button({ text, ...rest }: Props) {
   return (
     <Container {...rest}>
-      {/* <Container activeOpacity={0.7} {...rest}> */}
       <Title>{text}</Title>
     </Container>
   );
