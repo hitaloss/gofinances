@@ -35,8 +35,6 @@ function Register() {
     name: "Categoria",
   });
 
-  const dataKey = "@blufinances:transactions";
-
   type RootTabParamList = {
     Listagem: undefined;
     Cadastrar: undefined;
@@ -66,10 +64,12 @@ function Register() {
       id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
-      typeSelected,
+      type: typeSelected,
       category: category.key,
       date: new Date(),
     };
+
+    const dataKey = "@blufinances:transactions";
 
     try {
       const transactionStorage = await AsyncStorage.getItem(dataKey);
@@ -96,7 +96,7 @@ function Register() {
     }
   };
 
-  const handleTypeSelected = (type: "up" | "down") => {
+  const handleTypeSelected = (type: "positive" | "negative") => {
     setTypeSelected(type);
   };
 
@@ -134,14 +134,14 @@ function Register() {
             />
             <TransactionsTypes>
               <TransactionTypeBtn
-                onPress={() => handleTypeSelected("up")}
-                isActive={typeSelected === "up"}
+                onPress={() => handleTypeSelected("positive")}
+                isActive={typeSelected === "positive"}
                 type="up"
                 text="Income"
               />
               <TransactionTypeBtn
-                onPress={() => handleTypeSelected("down")}
-                isActive={typeSelected === "down"}
+                onPress={() => handleTypeSelected("negative")}
+                isActive={typeSelected === "negative"}
                 type="down"
                 text="Outcome"
               />

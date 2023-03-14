@@ -19,6 +19,7 @@ export const Title = styled.Text`
     color: ${({theme}) => theme.colors.shape};
     font-size: ${RFValue(18)}px;
     font-family: ${({theme}) => theme.fonts.regular};
+    text-transform: capitalize;
 `;
 
 export const Form = styled.View`
