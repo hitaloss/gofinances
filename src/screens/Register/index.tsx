@@ -20,6 +20,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { categorySchema } from "../../schemas/schema";
 
+import { useNavigation } from "@react-navigation/native";
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Register() {
@@ -34,9 +37,21 @@ function Register() {
 
   const dataKey = "@blufinances:transactions";
 
+  type RootTabParamList = {
+    Listagem: undefined;
+    Cadastrar: undefined;
+    Resumo: undefined;
+  };
+  type HomeScreenNavigationProp = BottomTabNavigationProp<
+    RootTabParamList,
+    "Listagem"
+  >;
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+
   const {
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(categorySchema),
@@ -66,6 +81,15 @@ function Register() {
       const currentStorage = [...transactionHistory, newTransaction];
 
       await AsyncStorage.setItem(dataKey, JSON.stringify(currentStorage));
+
+      reset();
+      setTypeSelected("");
+      setCategory({
+        key: "category",
+        name: "Categoria",
+      });
+
+      navigation.navigate("Listagem");
     } catch (error) {
       console.log(error);
       Alert.alert("Não foi possível salvar");
