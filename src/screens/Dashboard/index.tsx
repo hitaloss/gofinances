@@ -29,10 +29,24 @@ export interface TransactionCardListProps extends TransactionCardProps {
   id: string;
 }
 
+interface highlightProps {
+  amount: string;
+}
+
+interface HighLightValue {
+  entries: highlightProps;
+  expenses: highlightProps;
+  total: highlightProps;
+}
+
 function Dashboard() {
   const [transactionsData, setTransactionsData] = useState<
     TransactionCardListProps[]
   >([]);
+
+  const [highlightValue, setHighlightValue] = useState<HighLightValue>(
+    {} as HighLightValue
+  );
 
   const dataKey = "@blufinances:transactions";
 
@@ -40,8 +54,17 @@ function Dashboard() {
     const localStorage = await AsyncStorage.getItem(dataKey);
     const transactions = localStorage ? JSON.parse(localStorage) : [];
 
+    let positiveTotal = 0;
+    let negativeTotal = 0;
+
     const transactionsFormatted: TransactionCardListProps[] = transactions.map(
       (item: TransactionCardListProps) => {
+        if (item.type === "positive") {
+          positiveTotal += Number(item.amount);
+        } else {
+          negativeTotal += Number(item.amount);
+        }
+
         const amount = Number(item.amount).toLocaleString("pt-BR", {
           style: "currency",
           currency: "BRL",
@@ -62,6 +85,29 @@ function Dashboard() {
       }
     );
     setTransactionsData(transactionsFormatted);
+
+    const total = positiveTotal - negativeTotal;
+
+    setHighlightValue({
+      entries: {
+        amount: positiveTotal.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        }),
+      },
+      expenses: {
+        amount: negativeTotal.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        }),
+      },
+      total: {
+        amount: total.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        }),
+      },
+    });
   };
 
   useEffect(() => {
@@ -98,19 +144,19 @@ function Dashboard() {
         <HighlightCard
           type="up"
           title={"Entradas"}
-          amount={"R$ 17.400,00"}
+          amount={highlightValue.entries.amount}
           lastTransaction={"Última entrada dia 13 de abril"}
         />
         <HighlightCard
           type="down"
           title={"Saídas"}
-          amount={"R$ 1.259,00"}
+          amount={highlightValue.expenses.amount}
           lastTransaction={"Última entrada dia 03 de abril"}
         />
         <HighlightCard
           type="total"
           title={"Total"}
-          amount={"R$ 16.141,00"}
+          amount={highlightValue.total.amount}
           lastTransaction={"1 à 16 de abril"}
         />
       </HighlightCards>
