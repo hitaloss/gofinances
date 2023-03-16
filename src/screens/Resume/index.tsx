@@ -1,10 +1,15 @@
 import React from "react";
-import { Container, Title } from "./styles";
+import HistoryCard from "../../components/HistoryCard";
+import { Container, Header, Title } from "./styles";
 
 function Resume() {
   return (
     <Container>
-      <Title>Resumo por categoria</Title>
+      <Header>
+        <Title>Resumo por categoria</Title>
+      </Header>
+
+      <HistoryCard title="Compas" amount="R$ 150,80" color="red" />
     </Container>
   );
 }
