@@ -137,13 +137,13 @@ function Register() {
                 onPress={() => handleTypeSelected("positive")}
                 isActive={typeSelected === "positive"}
                 type="up"
-                text="Income"
+                text="Entrada"
               />
               <TransactionTypeBtn
                 onPress={() => handleTypeSelected("negative")}
                 isActive={typeSelected === "negative"}
                 type="down"
-                text="Outcome"
+                text="Saída"
               />
             </TransactionsTypes>
             <SelectCategory
