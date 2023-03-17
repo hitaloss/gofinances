@@ -33,6 +33,7 @@
     "react-native-screens": "~3.18.0",
     "react-native-uuid": "^2.0.1",
     "styled-components": "^5.3.6",
+    "victory-native": "^36.6.8",
     "yup": "^1.0.0"
   },
   "devDependencies": {
