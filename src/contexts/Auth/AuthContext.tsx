@@ -13,6 +13,13 @@ interface User {
   photo?: string;
 }
 
+interface AuthResponse {
+  params: {
+    access_token: string;
+  };
+  type: string;
+}
+
 interface IAuthContextData {
   user: User;
   googleRegister(): Promise<void>;
@@ -21,12 +28,7 @@ interface IAuthContextData {
 export const AuthContext = createContext({} as IAuthContextData);
 
 function AuthProvider({ children }: Props) {
-  const user: User = {
-    id: "123",
-    name: "Teste Júnior",
-    email: "teste@email.com",
-    photo: "https://random.dog/woof",
-  };
+  const [user, setUser] = useState<User>({} as User);
 
   const googleRegister = async () => {
     try {
@@ -37,8 +39,24 @@ function AuthProvider({ children }: Props) {
       const SCOPE = encodeURI("profile email");
 
       const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
-      const response = await AuthSession.startAsync({ authUrl });
-      console.log(response);
+      const { type, params } = (await AuthSession.startAsync({
+        authUrl,
+      })) as AuthResponse;
+
+      if (type === "success") {
+        const response = await fetch(
+          `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${params.access_token}`
+        );
+
+        const userInfo = await response.json();
+
+        setUser({
+          id: userInfo.id,
+          email: userInfo.email,
+          name: userInfo.given_name,
+          photo: userInfo.picture,
+        });
+      }
     } catch (error) {
       if (error) {
         throw new Error(error as string);
