@@ -1,7 +1,12 @@
+
+
 {
+  "name": "bluefinances",
+  "displayName": "gofinances",
   "expo": {
     "name": "bluefinances",
     "slug": "bluefinances",
+    "scheme": "bluefinances",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
