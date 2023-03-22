@@ -20,7 +20,6 @@ function SignIn() {
   const { googleRegister } = useContext(AuthContext);
 
   const handleSignInGoogle = async () => {
-    console.log("handleSignInGoogle");
     try {
       await googleRegister();
     } catch (error) {
