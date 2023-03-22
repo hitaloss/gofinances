@@ -10,7 +10,7 @@ interface Props extends RectButtonProps {
 
 function SignInButton({ title, svg: Svg, ...rest }: Props) {
   return (
-    <Button>
+    <Button {...rest}>
       <ImgContainer>
         <Svg />
       </ImgContainer>
