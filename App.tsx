@@ -16,6 +16,9 @@ import * as Font from "expo-font";
 
 import theme from "./global/styles/theme";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import SignIn from "./src/screens/SignIn";
+import Providers from "./src/contexts";
+import Routes from "./src/routes";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -55,10 +58,10 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer>
-        <StatusBar barStyle="light-content" />
-        <AppRoutes />
-      </NavigationContainer>
+      <StatusBar barStyle="light-content" />
+      <Providers>
+        <Routes />
+      </Providers>
     </ThemeProvider>
   );
 }
@@ -70,5 +73,3 @@ export default function WrappedApp() {
     </GestureHandlerRootView>
   );
 }
-
-// export default App;
