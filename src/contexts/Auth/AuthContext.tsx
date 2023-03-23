@@ -27,6 +27,7 @@ interface AuthResponse {
 interface IAuthContextData {
   user: User;
   loading: boolean;
+  signOut(): Promise<void>;
   googleRegister(): Promise<void>;
   appleRegister(): Promise<void>;
 }
@@ -82,11 +83,12 @@ function AuthProvider({ children }: Props) {
         ],
       });
       if (credential) {
+        const name = credential.fullName!.givenName!;
         const appleUser = {
           id: String(credential.user),
-          name: credential.fullName!.givenName!,
+          name,
           email: credential.email!,
-          photo: undefined,
+          photo: `https://ui-avatars.com/api/?name=${name}&length=1`,
         };
 
         setUser(appleUser);
@@ -99,6 +101,11 @@ function AuthProvider({ children }: Props) {
         throw new Error(String(error));
       }
     }
+  };
+
+  const signOut = async () => {
+    setUser({} as User);
+    await AsyncStorage.removeItem(userStorageKey);
   };
 
   useEffect(() => {
@@ -116,7 +123,7 @@ function AuthProvider({ children }: Props) {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, googleRegister, appleRegister }}
+      value={{ user, loading, googleRegister, appleRegister, signOut }}
     >
       {children}
     </AuthContext.Provider>
