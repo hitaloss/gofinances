@@ -5,6 +5,7 @@ import { RFPercentage, RFValue } from "react-native-responsive-fontsize"
 import { getBottomSpace, getStatusBarHeight } from "react-native-iphone-x-helper";
 
 import { TransactionCardListProps } from ".";
+import { BorderlessButton } from "react-native-gesture-handler";
 
 export const Container = styled.View`
     flex: 1;
@@ -57,8 +58,9 @@ export const UserName = styled.Text`
     font-size: ${RFValue(18)}px;
 `
 
+export const PowerBtn = styled(BorderlessButton)``;
 
-export const PowerBtn = styled(Feather)`
+export const PowerBtnIcon = styled(Feather)`
     color: ${({theme}) => theme.colors.secondary};
     font-size: ${RFValue(24)}px;
 `

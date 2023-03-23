@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useCallback, useState, useContext } from "react";
 import HighlightCard from "../../components/HighlightCard";
 import TransactionCard, {
   TransactionCardProps,
@@ -19,6 +19,7 @@ import {
   Transactions,
   TransactionList,
   LoadContainer,
+  PowerBtnIcon,
 } from "./styles";
 
 import { useFocusEffect } from "@react-navigation/native";
@@ -27,6 +28,7 @@ import "intl";
 import "intl/locale-data/jsonp/pt-BR";
 import { ActivityIndicator } from "react-native";
 import { useTheme } from "styled-components";
+import { AuthContext } from "../../contexts/Auth/AuthContext";
 
 export interface TransactionCardListProps extends TransactionCardProps {
   id: string;
@@ -73,11 +75,13 @@ function Dashboard() {
     {} as HighLightValue
   );
 
+  const { user, signOut } = useContext(AuthContext);
+
   const [loading, setLoading] = useState(true);
 
-  const dataKey = "@blufinances:transactions";
-
   const theme = useTheme();
+
+  const dataKey = "@blufinances:transactions";
 
   const loadTransactions = async () => {
     const localStorage = await AsyncStorage.getItem(dataKey);
@@ -170,16 +174,18 @@ function Dashboard() {
               <GreetingsCard>
                 <ProfilePhoto
                   source={{
-                    uri: "https://random.dog/b3b24c5f-2c21-4b94-a68f-3b06d4432a04.JPG",
+                    uri: user.photo,
                   }}
                 />
                 <GreetingsText>
                   <Hello>Olá,</Hello>
-                  <UserName>Hítalo</UserName>
+                  <UserName>{user.name}</UserName>
                 </GreetingsText>
               </GreetingsCard>
 
-              <PowerBtn name="power" />
+              <PowerBtn onPress={signOut}>
+                <PowerBtnIcon name="power" />
+              </PowerBtn>
             </UserWraper>
           </Header>
 
