@@ -49,12 +49,16 @@ function getLastTransactionDate(
   transactions: TransactionCardListProps[],
   type: "positive" | "negative"
 ) {
+  const collectionFilter = transactions.filter((item) => item.type === type);
+
+  if (collectionFilter.length < 1) {
+    return 0;
+  }
+
   const lastTransaction = new Date(
     Math.max.apply(
       Math,
-      transactions
-        .filter((item) => item.type === type)
-        .map((item) => new Date(item.date).getTime())
+      collectionFilter.map((item) => new Date(item.date).getTime())
     )
   );
 
@@ -121,7 +125,10 @@ function Dashboard() {
     const lastExpensesDate = getLastTransactionDate(transactions, "negative");
     const totalTimeStamp = `01 a ${lastExpensesDate}`;
 
-    const total = positiveTotal - negativeTotal;
+    const total =
+      negativeTotal === 0
+        ? "Não há transações até o momento"
+        : positiveTotal - negativeTotal;
 
     setHighlightValue({
       entries: {
@@ -129,14 +136,20 @@ function Dashboard() {
           style: "currency",
           currency: "BRL",
         }),
-        lastTransaction: `Última entrada dia ${lastEntriesDate}`,
+        lastTransaction:
+          lastEntriesDate === 0
+            ? "Não há transações até o momento"
+            : `Última entrada dia ${lastEntriesDate}`,
       },
       expenses: {
         amount: negativeTotal.toLocaleString("pt-BR", {
           style: "currency",
           currency: "BRL",
         }),
-        lastTransaction: `Última saída dia ${lastExpensesDate}`,
+        lastTransaction:
+          lastExpensesDate === 0
+            ? "Não há transações até o momento"
+            : `Última saída dia ${lastExpensesDate}`,
       },
       total: {
         amount: total.toLocaleString("pt-BR", {
