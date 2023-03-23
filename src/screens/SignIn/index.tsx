@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, Platform } from "react-native";
 import { Alert } from "react-native";
 import {
   Container,
@@ -70,11 +70,13 @@ function SignIn() {
             svg={GoogleSvg}
             onPress={handleSignInGoogle}
           />
-          <SignInButton
-            title="Entrar com Apple"
-            svg={AppleSvg}
-            onPress={handleSignInApple}
-          />
+          {Platform.OS === "ios" && (
+            <SignInButton
+              title="Entrar com Apple"
+              svg={AppleSvg}
+              onPress={handleSignInApple}
+            />
+          )}
         </FooterWrapper>
 
         {loading && (
