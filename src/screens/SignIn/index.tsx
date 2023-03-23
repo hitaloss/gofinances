@@ -17,7 +17,7 @@ import SignInButton from "../../components/SignInButton";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
 
 function SignIn() {
-  const { googleRegister } = useContext(AuthContext);
+  const { googleRegister, appleRegister } = useContext(AuthContext);
 
   const handleSignInGoogle = async () => {
     try {
@@ -25,6 +25,15 @@ function SignIn() {
     } catch (error) {
       console.log(error);
       Alert.alert("Não foi possível conectar a conta Google");
+    }
+  };
+
+  const handleSignInApple = async () => {
+    try {
+      await appleRegister();
+    } catch (error) {
+      console.log(error);
+      Alert.alert("Não foi possível conectar a conta Apple");
     }
   };
 
@@ -51,7 +60,11 @@ function SignIn() {
             svg={GoogleSvg}
             onPress={handleSignInGoogle}
           />
-          <SignInButton title="Entrar com Apple" svg={AppleSvg} />
+          <SignInButton
+            title="Entrar com Apple"
+            svg={AppleSvg}
+            onPress={handleSignInApple}
+          />
         </FooterWrapper>
       </Footer>
     </Container>
