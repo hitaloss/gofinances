@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { ActivityIndicator } from "react-native";
 import HistoryCard from "../../components/HistoryCard";
 import { categories } from "../../utils/categories";
@@ -23,6 +23,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { useTheme } from "styled-components";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useFocusEffect } from "@react-navigation/native";
+import { AuthContext } from "../../contexts/Auth/AuthContext";
 
 interface CategoryProps {
   key: string;
@@ -38,6 +39,8 @@ function Resume() {
   const [dateFocus, setDateFocus] = useState<Date>(new Date());
   const [loading, setLoading] = useState(false);
 
+  const { user } = useContext(AuthContext);
+
   const theme = useTheme();
 
   const handleChangeDate = (action: "next" | "previous") => {
@@ -50,7 +53,7 @@ function Resume() {
 
   const loadData = async () => {
     setLoading(true);
-    const dataKey = "@blufinances:transactions";
+    const dataKey = `@blufinances:transactions_user${user.id}`;
     const storage = await AsyncStorage.getItem(dataKey);
     const storageFormatted = storage ? JSON.parse(storage) : [];
 

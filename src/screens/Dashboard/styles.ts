@@ -56,6 +56,7 @@ export const UserName = styled.Text`
     font-family: ${({theme}) => theme.fonts.bold};
     color: ${({theme}) => theme.colors.shape};
     font-size: ${RFValue(18)}px;
+    text-transform: capitalize;
 `
 
 export const PowerBtn = styled(BorderlessButton)``;

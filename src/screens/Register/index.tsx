@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import uuid from "react-native-uuid";
 
 import { Modal, TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
@@ -24,6 +24,7 @@ import { useNavigation } from "@react-navigation/native";
 import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthContext } from "../../contexts/Auth/AuthContext";
 
 function Register() {
   const [typeSelected, setTypeSelected] = useState<string>("");
@@ -34,6 +35,8 @@ function Register() {
     key: "category",
     name: "Categoria",
   });
+
+  const { user } = useContext(AuthContext);
 
   type RootTabParamList = {
     Listagem: undefined;
@@ -69,7 +72,7 @@ function Register() {
       date: new Date(),
     };
 
-    const dataKey = "@blufinances:transactions";
+    const dataKey = `@blufinances:transactions_user${user.id}`;
 
     try {
       const transactionStorage = await AsyncStorage.getItem(dataKey);

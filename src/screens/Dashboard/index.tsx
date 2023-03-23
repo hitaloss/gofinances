@@ -70,18 +70,16 @@ function Dashboard() {
   const [transactionsData, setTransactionsData] = useState<
     TransactionCardListProps[]
   >([]);
-
   const [highlightValue, setHighlightValue] = useState<HighLightValue>(
     {} as HighLightValue
   );
+  const [loading, setLoading] = useState(true);
 
   const { user, signOut } = useContext(AuthContext);
 
-  const [loading, setLoading] = useState(true);
-
   const theme = useTheme();
 
-  const dataKey = "@blufinances:transactions";
+  const dataKey = `@blufinances:transactions_user${user.id}`;
 
   const loadTransactions = async () => {
     const localStorage = await AsyncStorage.getItem(dataKey);
