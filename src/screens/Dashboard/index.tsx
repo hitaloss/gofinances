@@ -123,7 +123,10 @@ function Dashboard() {
 
     const lastEntriesDate = getLastTransactionDate(transactions, "positive");
     const lastExpensesDate = getLastTransactionDate(transactions, "negative");
-    const totalTimeStamp = `01 a ${lastExpensesDate}`;
+    const totalTimeStamp =
+      lastExpensesDate === 0
+        ? "Não há transações até o momento"
+        : `01 a ${lastExpensesDate}`;
 
     const total = positiveTotal - negativeTotal;
 
@@ -157,8 +160,6 @@ function Dashboard() {
       },
     });
     setLoading(false);
-    // console.log(await AsyncStorage.getItem("@gofinances:user"));
-    // console.log(user);
   };
 
   useEffect(() => {
