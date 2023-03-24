@@ -125,10 +125,7 @@ function Dashboard() {
     const lastExpensesDate = getLastTransactionDate(transactions, "negative");
     const totalTimeStamp = `01 a ${lastExpensesDate}`;
 
-    const total =
-      negativeTotal === 0
-        ? "Não há transações até o momento"
-        : positiveTotal - negativeTotal;
+    const total = positiveTotal - negativeTotal;
 
     setHighlightValue({
       entries: {
@@ -160,6 +157,8 @@ function Dashboard() {
       },
     });
     setLoading(false);
+    // console.log(await AsyncStorage.getItem("@gofinances:user"));
+    // console.log(user);
   };
 
   useEffect(() => {

@@ -57,13 +57,15 @@ function AuthProvider({ children }: Props) {
 
         const userInfo = await response.json();
 
-        setUser({
+        const userObj = {
           id: userInfo.id,
           name: userInfo.given_name,
           email: userInfo.email,
           photo: userInfo.picture,
-        });
-        await AsyncStorage.setItem(userStorageKey, JSON.stringify(userInfo));
+        };
+
+        setUser(userObj);
+        await AsyncStorage.setItem(userStorageKey, JSON.stringify(userObj));
       }
     } catch (error) {
       if (error instanceof Error) {
