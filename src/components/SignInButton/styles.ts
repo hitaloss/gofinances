@@ -9,7 +9,7 @@ export const Button = styled(RectButton)`
     border-radius: 5px;
     align-items: center;
     flex-direction: row;
-    margin-bottom: 16px
+    margin-bottom: 16px;
 `;
 
 export const ImgContainer = styled.View`
