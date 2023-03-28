@@ -29,6 +29,7 @@ import "intl/locale-data/jsonp/pt-BR";
 import { ActivityIndicator } from "react-native";
 import { useTheme } from "styled-components";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
+import SignOutModal from "../../components/SignOutModal";
 
 export interface TransactionCardListProps extends TransactionCardProps {
   id: string;
@@ -78,12 +79,21 @@ function Dashboard() {
     {} as HighLightValue
   );
   const [loading, setLoading] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
 
   const { user, signOut } = useContext(AuthContext);
 
   const theme = useTheme();
 
   const dataKey = `@blufinances:transactions_user${user.id}`;
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
 
   const loadTransactions = async () => {
     const localStorage = await AsyncStorage.getItem(dataKey);
@@ -194,11 +204,17 @@ function Dashboard() {
                 </GreetingsText>
               </GreetingsCard>
 
-              <PowerBtn onPress={signOut}>
+              <PowerBtn onPress={handleOpenModal}>
                 <PowerBtnIcon name="power" />
               </PowerBtn>
             </UserWraper>
           </Header>
+
+          <SignOutModal
+            handleCloseModal={handleCloseModal}
+            signOut={signOut}
+            open={openModal}
+          />
 
           <HighlightCards>
             <HighlightCard
