@@ -1,6 +1,8 @@
 
 # Gofinances - Documentação
 
+![logo vetorr (1)-2]([https://user-images.githubusercontent.com/98785969/182271996-d37e177b-b4af-4ad1-bcc5-ae6962ba69eb.png](https://drive.google.com/file/d/1YYqu-CtQ6vc8kB6Cipuf-zqhb8ZkNm3u/view?usp=share_link))
+
 ## Sumário
 
 - [Gofinances - Documentação](#gofinances---documentação)
