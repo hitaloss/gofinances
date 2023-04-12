@@ -1,7 +1,9 @@
 
 # Gofinances - Documentação
 
-![logo vetorr (1)-2](https://drive.google.com/file/d/1YYqu-CtQ6vc8kB6Cipuf-zqhb8ZkNm3u/view?usp=share_link)
+<div>
+  <img source="https://user-images.githubusercontent.com/98706938/231578669-9da0f32f-7b85-4636-9b1f-ad12ab69258c.svg" width="100px" />
+</div>
 
 ## Sumário
 
